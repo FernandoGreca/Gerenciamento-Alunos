@@ -2,15 +2,12 @@ package com.teste.consultaescola.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teste.consultaescola.dao.AlunoDao;
 import com.teste.consultaescola.model.Aluno;
-
-import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -31,15 +28,10 @@ public class AlunoController {
     }
     
     @PostMapping("InserirAlunos")
-    public ModelAndView inserirAluno(@Valid Aluno aluno, BindingResult br) {
+    public ModelAndView inserirAluno(Aluno aluno) {
         ModelAndView mv = new ModelAndView();
-        if (br.hasErrors()) {
-            mv.setViewName("aluno/form-aluno");
-            mv.addObject("aluno", aluno);
-        } else {
-            mv.setViewName("redirect:/alunos-cadastrados");
-            alunoRepositorio.save(aluno);
-        }
+        mv.setViewName("redirect:/alunos-cadastrados");
+        alunoRepositorio.save(aluno);
         return mv;
     }
 

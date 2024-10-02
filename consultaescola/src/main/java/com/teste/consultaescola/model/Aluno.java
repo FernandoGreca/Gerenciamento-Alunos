@@ -10,7 +10,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
@@ -20,25 +19,20 @@ public class Aluno {
     private Integer id;
 
     @Column(name="nome")
-    @NotBlank
     private String nome;
 
     @Column(name="curso")
     @Enumerated(EnumType.STRING)
-    @NotBlank
     private Curso curso;
 
     @Column(name="matricula")
-    @NotBlank
     private String matricula;
 
     @Column(name="status")
     @Enumerated(EnumType.STRING)
-    @NotBlank
     private Status status;
 
     @Column(name="turno")
-    @NotBlank
     private String turno;
 
 

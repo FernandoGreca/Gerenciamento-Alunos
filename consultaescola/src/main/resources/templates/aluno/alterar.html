@@ -30,9 +30,7 @@
             <!-- INPUT NOME -->
             <div class="row my-3">
                 <div class="col-md-6 form-group offset-md-3">
-                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nome')}">
-                        <span th:errors="*{nome}"></span>
-                    </div>
+                    
 
                     <label><strong>Nome do Aluno:</strong></label>
                     <input class="form-control" placeholder="Ex: Marcos Silva" data-th-field="*{nome}">
@@ -42,9 +40,7 @@
             <!-- INPUT CURSO -->
             <div class="row my-3">
                 <div class="col-md-6 form-group offset-md-3">
-                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('curso')}">
-                        <span th:errors="*{curso}"></span>
-                    </div>
+                    
 
                     <label><strong>Selecione o Curso:</strong></label>
                     <select class="form-control" data-th-field="*{curso}">
@@ -58,9 +54,7 @@
             <!-- INPUT MATRICULA -->
             <div class="row my-3">
                 <div class="col-md-3 form-group offset-md-3">
-                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('matricula')}">
-                        <span th:errors="*{matricula}"></span>
-                    </div>
+                    
 
                     <label><strong>Matrícula:</strong></label>
                     <input id="matricula" class="form-control" data-th-field="*{matricula}" readonly>
@@ -70,9 +64,7 @@
             <!-- INPUT STATUS -->
             <div class="row my-3">
                 <div class="col-md-6 form-group offset-md-3">
-                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('status')}">
-                        <span th:errors="*{status}"></span>
-                    </div>
+                    
 
                     <label><strong>Selecione o Status:</strong></label>
                     <select class="form-control" data-th-field="*{status}">
@@ -86,9 +78,7 @@
             <!-- INPUT TURNO -->
             <div class="row my-3">
                 <div class="col-md-6 form-group offset-md-3">
-                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('turno')}">
-                        <span th:errors="*{turno}"></span>
-                    </div>
+                    
                     
                     <label><strong>Turno:</strong></label>
                     <input class="form-control" placeholder="Ex: Manhã" data-th-field="*{turno}">
