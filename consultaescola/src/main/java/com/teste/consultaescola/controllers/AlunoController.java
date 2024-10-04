@@ -2,6 +2,7 @@ package com.teste.consultaescola.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,6 +10,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teste.consultaescola.dao.AlunoDao;
 import com.teste.consultaescola.model.Aluno;
+
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -29,25 +32,18 @@ public class AlunoController {
     }
     
     @PostMapping("InserirAlunos")
-    public ModelAndView inserirAluno(Aluno aluno, RedirectAttributes redirectAttributes) {
+    public ModelAndView inserirAluno(@Valid Aluno aluno, BindingResult br) {
         ModelAndView mv = new ModelAndView();
         
-        if (aluno.getNome().isEmpty()) {
-            redirectAttributes.addFlashAttribute("msg", "Você deve preencher o campo NOME!!");
-        } else if (aluno.getCurso() == null) {
-            redirectAttributes.addFlashAttribute("msg", "Você deve preencher escolher um CURSO!!");
-        } else if (aluno.getMatricula().isEmpty()) {
-            redirectAttributes.addFlashAttribute("msg", "Você deve gerar uma MATRÍCULA!!");
-        } else if (aluno.getStatus() == null) {
-            redirectAttributes.addFlashAttribute("msg", "Você deve escolher um STATUS!!");
-        } else if (aluno.getTurno().isEmpty()) {
-            redirectAttributes.addFlashAttribute("msg", "Você deve preencher preencher o campo TURNO!!");
+        if (br.hasErrors()) {
+            mv.setViewName("aluno/form-aluno");
+            mv.addObject("aluno");
         } else {
-            alunoRepositorio.save(aluno);
             mv.setViewName("redirect:/alunos-cadastrados");
+            alunoRepositorio.save(aluno);
             return mv;
         }
-        mv.setViewName("redirect:/form-aluno");
+    
         return mv;
     }
 
