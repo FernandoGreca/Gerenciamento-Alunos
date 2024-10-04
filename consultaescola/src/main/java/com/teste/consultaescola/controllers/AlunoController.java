@@ -29,17 +29,28 @@ public class AlunoController {
     }
     
     @PostMapping("InserirAlunos")
-public ModelAndView inserirAluno(Aluno aluno, RedirectAttributes redirectAttributes) {
-    ModelAndView mv = new ModelAndView();
-    if (aluno.getNome() == null || aluno.getCurso() == null || aluno.getStatus() == null || aluno.getTurno() == null) {
-        redirectAttributes.addFlashAttribute("msg", "Você deve preencher todos os valores corretamente!!");
+    public ModelAndView inserirAluno(Aluno aluno, RedirectAttributes redirectAttributes) {
+        ModelAndView mv = new ModelAndView();
+        
+        if (aluno.getNome().isEmpty()) {
+            redirectAttributes.addFlashAttribute("msg", "Você deve preencher o campo NOME!!");
+        } else if (aluno.getCurso() == null) {
+            redirectAttributes.addFlashAttribute("msg", "Você deve preencher escolher um CURSO!!");
+            
+        } else if (aluno.getMatricula().isEmpty()) {
+            redirectAttributes.addFlashAttribute("msg", "Você deve gerar uma MATRÍCULA!!");
+        } else if (aluno.getStatus() == null) {
+            redirectAttributes.addFlashAttribute("msg", "Você deve escolher um STATUS!!");
+        } else if (aluno.getTurno().isEmpty()) {
+            redirectAttributes.addFlashAttribute("msg", "Você deve preencher preencher o campo TURNO!!");
+        } else {
+            alunoRepositorio.save(aluno);
+            mv.setViewName("redirect:/alunos-cadastrados");
+            return mv;
+        }
         mv.setViewName("redirect:/form-aluno");
         return mv;
     }
-    alunoRepositorio.save(aluno);
-    mv.setViewName("redirect:/alunos-cadastrados");
-    return mv;
-}
 
 
     @GetMapping("/alunos-cadastrados")
@@ -60,11 +71,27 @@ public ModelAndView inserirAluno(Aluno aluno, RedirectAttributes redirectAttribu
         return mv;
     }
     
-    @PostMapping("/alterar")
-    public ModelAndView alterar(Aluno aluno) {
+    @PostMapping("alterar")
+    public ModelAndView alterar(Aluno aluno, RedirectAttributes redirectAttributes) {
         ModelAndView mv = new ModelAndView();
-        alunoRepositorio.save(aluno);
-        mv.setViewName("redirect:/alunos-cadastrados");
+        String padrao = "Ao começar a editar um aluno você não pode deixar o campo ";
+
+        if (aluno.getNome().isEmpty()) {
+            redirectAttributes.addFlashAttribute("alterarMsg", padrao + "NOME vazio!!");
+        } else if (aluno.getCurso() == null) {
+            redirectAttributes.addFlashAttribute("alterarMsg", padrao + "CURSO vazio!!");
+            
+        } else if (aluno.getStatus() == null) {
+            redirectAttributes.addFlashAttribute("alterarMsg", padrao + "STATUS vazio!!");
+        } else if (aluno.getTurno().isEmpty()) {
+            redirectAttributes.addFlashAttribute("alterarMsg", padrao + "TURNO vazio!!");
+        } else {
+            alunoRepositorio.save(aluno);
+            mv.setViewName("redirect:/alunos-cadastrados");
+            return mv;
+        }
+
+        mv.setViewName("redirect:/alterar/" + aluno.getId());
         return mv;
     }
     

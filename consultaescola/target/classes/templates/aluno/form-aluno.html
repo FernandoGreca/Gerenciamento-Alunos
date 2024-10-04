@@ -27,15 +27,18 @@
 
         <form method="post" action="/InserirAlunos" th:object="${aluno}" novalidate>
 
-            <div>
-                <span th:if="${msg != null}" th:text="${msg}" style="color: red;"></span>
+            <!-- ALERTA DE ERRO -->
+            <div class="row my-3">
+                <div class="col-md-6 form-group offset-md-3">
+                    <div th:if="${msg != null}" class="alert alert-danger" role="alert">
+                        <span  th:text="${msg}" style="color: red;"></span>
+                    </div>
+                </div>
             </div>
 
             <!-- INPUT NOME -->
             <div class="row my-3">
                 <div class="col-md-6 form-group offset-md-3">
-                    
-                    
                     <label><strong>Nome do Aluno:</strong></label>
                     <input class="form-control" placeholder="Ex: Marcos Silva" data-th-field="*{nome}">
                 </div>
@@ -44,8 +47,6 @@
             <!-- INPUT CURSO -->
             <div class="row my-3">
                 <div class="col-md-6 form-group offset-md-3">
-                    
-                    
                     <label><strong>Selecione o Curso:</strong></label>
                     <select class="form-control" data-th-field="*{curso}">
                         <option value="" selected>Selecione um curso</option>
@@ -57,9 +58,7 @@
 
             <!-- INPUT MATRICULA -->
             <div class="row my-3">
-                <div class="col-md-3 form-group offset-md-3">
-                   
-                    
+                <div class="col-md-3 form-group offset-md-3">  
                     <label><strong>Gerar Matrícula:</strong></label>
                     <input id="matricula" class="form-control" data-th-field="*{matricula}" readonly>
                 </div>
@@ -71,8 +70,6 @@
             <!-- INPUT STATUS -->
             <div class="row my-3">
                 <div class="col-md-6 form-group offset-md-3">
-                    
-                    
                     <label><strong>Selecione o Status:</strong></label>
                     <select class="form-control" data-th-field="*{status}">
                         <option value="" selected>Selecione um status</option>
@@ -85,8 +82,6 @@
             <!-- INPUT TURNO -->
             <div class="row my-3">
                 <div class="col-md-6 form-group offset-md-3">
-                    
-                    
                     <label><strong>Turno:</strong></label>
                     <input class="form-control" placeholder="Ex: Manhã" data-th-field="*{turno}">
                 </div>
