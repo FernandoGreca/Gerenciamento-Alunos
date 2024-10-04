@@ -26,6 +26,11 @@
         <hr>
 
         <form method="post" action="/InserirAlunos" th:object="${aluno}" novalidate>
+
+            <div>
+                <span th:if="${msg != null}" th:text="${msg}" style="color: red;"></span>
+            </div>
+
             <!-- INPUT NOME -->
             <div class="row my-3">
                 <div class="col-md-6 form-group offset-md-3">

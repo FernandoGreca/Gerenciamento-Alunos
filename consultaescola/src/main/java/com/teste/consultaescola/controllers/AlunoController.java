@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teste.consultaescola.dao.AlunoDao;
 import com.teste.consultaescola.model.Aluno;
@@ -28,12 +29,18 @@ public class AlunoController {
     }
     
     @PostMapping("InserirAlunos")
-    public ModelAndView inserirAluno(Aluno aluno) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("redirect:/alunos-cadastrados");
-        alunoRepositorio.save(aluno);
+public ModelAndView inserirAluno(Aluno aluno, RedirectAttributes redirectAttributes) {
+    ModelAndView mv = new ModelAndView();
+    if (aluno.getNome() == null || aluno.getCurso() == null || aluno.getStatus() == null || aluno.getTurno() == null) {
+        redirectAttributes.addFlashAttribute("msg", "Você deve preencher todos os valores corretamente!!");
+        mv.setViewName("redirect:/form-aluno");
         return mv;
     }
+    alunoRepositorio.save(aluno);
+    mv.setViewName("redirect:/alunos-cadastrados");
+    return mv;
+}
+
 
     @GetMapping("/alunos-cadastrados")
     public ModelAndView alunosCadastrados() {
