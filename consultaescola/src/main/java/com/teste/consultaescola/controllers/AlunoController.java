@@ -102,4 +102,20 @@ public class AlunoController {
         mv.setViewName("aluno/filtro-alunos");
         return mv;
     }
+
+    @GetMapping("/alunos-ativos")
+    public ModelAndView listaAlunosAtivos() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("aluno/alunos-ativos");
+        mv.addObject("alunosAtivos", alunoRepositorio.findByStatusAtivo());
+        return mv;
+    }
+    
+    @GetMapping("/alunos-inativos")
+    public ModelAndView listaAlunosInativos() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("aluno/alunos-inativos");
+        mv.addObject("alunosInativos", alunoRepositorio.findByStatusInativo());
+        return mv;
+    }
 }

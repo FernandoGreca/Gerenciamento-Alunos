@@ -20,6 +20,7 @@
             /* width: 262px; */
             width: 100%;
             height: 200px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -50,21 +51,27 @@
         <div class="row gap-5 d-flex justify-content-center">
             <!-- ALUNOS ATIVOS -->
             <div class="card" style="width: 18rem;">
-                <img src="img/alunos-ativos.jpg" class="card-img-top img-card-pesquisa d-flex justify-content-start">
+                <a th:href= "@{/alunos-ativos}">
+                    <img src="img/alunos-ativos.jpg" class="card-img-top img-card-pesquisa d-flex justify-content-start">
+                </a>
+                
                 <div class="card-body">
                     <h5 class="card-title">Alunos Ativos no Sistema</h5>
                     <p class="card-text">Busque por todos os alunos que estão ativos no sistema.</p>
-                    <a href="#" class="btn btn-outline-primary">Clique Aqui!</a>
+                    <a th:href= "@{/alunos-ativos}" class="btn btn-outline-primary">Clique Aqui!</a>
                 </div>
             </div>
 
             <!-- ALUNOS INATIVOS -->
             <div class="card" style="width: 18rem;">
-                <img src="img/alunos-inativos.jpeg" class="card-img-top img-card-pesquisa d-flex justify-content-start">
+                <a th:href= "@{/alunos-inativos}">
+                    <img src="img/alunos-inativos.jpeg" class="card-img-top img-card-pesquisa d-flex justify-content-start">
+                </a>
+                
                 <div class="card-body">
                     <h5 class="card-title">Alunos Inativos no Sistema</h5>
                     <p class="card-text">Busque por todos os alunos que estão inativos no sistema.</p>
-                    <a href="#" class="btn btn-outline-primary">Clique Aqui!</a>
+                    <a th:href= "@{/alunos-inativos}" class="btn btn-outline-primary">Clique Aqui!</a>
                 </div>
             </div>
 
