@@ -14,6 +14,10 @@ import com.teste.consultaescola.model.Aluno;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
 
 
 
@@ -134,4 +138,19 @@ public class AlunoController {
         mv.addObject("alunosCancelados", alunoRepositorio.findByStatusCancelado());
         return mv;
     }
+
+    @PostMapping("pesquisar-aluno")
+    public ModelAndView pesquisasrAluno(@RequestParam(required = false) String nome) {
+        ModelAndView mv = new ModelAndView();
+        List<Aluno> listaAlunos;
+        if (nome == null || nome.trim().isEmpty()) {
+            listaAlunos = alunoRepositorio.findAll();
+        } else {
+            listaAlunos = alunoRepositorio.findByNomeContainingIgnoreCase(nome);
+        }
+        mv.addObject("listaDeAlunos", listaAlunos);
+        mv.setViewName("aluno/pesquisa-resultado");
+        return mv;
+    }
+    
 }
