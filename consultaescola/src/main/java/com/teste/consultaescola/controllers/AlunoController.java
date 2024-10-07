@@ -118,4 +118,12 @@ public class AlunoController {
         mv.addObject("alunosInativos", alunoRepositorio.findByStatusInativo());
         return mv;
     }
+
+    @GetMapping("/alunos-trancados")
+    public ModelAndView listaAlunosTrancados() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("aluno/alunos-trancados");
+        mv.addObject("alunosTrancados", alunoRepositorio.findByStatusTrancado());
+        return mv;
+    }
 }

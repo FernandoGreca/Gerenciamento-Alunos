@@ -54,7 +54,7 @@
                 <a th:href= "@{/alunos-ativos}">
                     <img src="img/alunos-ativos.jpg" class="card-img-top img-card-pesquisa d-flex justify-content-start">
                 </a>
-                
+
                 <div class="card-body">
                     <h5 class="card-title">Alunos Ativos no Sistema</h5>
                     <p class="card-text">Busque por todos os alunos que estão ativos no sistema.</p>
@@ -77,11 +77,14 @@
 
             <!-- ALUNOS TRANCADOS -->
             <div class="card" style="width: 18rem;">
-                <img src="img/alunos-trancados.png" class="card-img-top img-card-pesquisa d-flex justify-content-start">
+                <a th:href= "@{/alunos-trancados}">
+                    <img src="img/alunos-trancados.png" class="card-img-top img-card-pesquisa d-flex justify-content-start">
+                </a>
+                
                 <div class="card-body">
                     <h5 class="card-title">Alunos Trancados no Sistema</h5>
                     <p class="card-text">Busque por todos os alunos que estão trancados no sistema.</p>
-                    <a href="#" class="btn btn-outline-primary">Clique Aqui!</a>
+                    <a th:href= "@{/alunos-trancados}" class="btn btn-outline-primary">Clique Aqui!</a>
                 </div>
             </div>
 
