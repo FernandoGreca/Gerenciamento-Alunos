@@ -24,8 +24,8 @@
         <h3>Alunos encontrados na pesquisa</h3>
         <hr>
 
-        <div class="d-flex gap-3">
-            <div class="card" style="width: 18rem;" th:each="alunos : ${listaDeAlunos}">
+        <div class="row d-flex justify-content-center gap-3">
+            <div class="card col-lg-3" style="width: 18rem;" th:each="alunos : ${listaDeAlunos}">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${alunos.nome}"></h5>
                     <p class="card-text" th:text="${alunos.curso}"></p>
