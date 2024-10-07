@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/login.css">
 
     <meta name="author" content="Fernando Greca">
-    <title>Academy | Login</title>
+    <title>Academy | Cadastro</title>
 </head>
 
 <body>
@@ -21,21 +21,22 @@
         <div class="container">
             <div class="main-div">
                 <div class="texto-header">
-                    <h2>Admin Login</h2>
-                    <p>Insira suas credenciais para efetuar login no sistema.</p>
+                    <h2>Cadastro de Usuário</h2>
+                    <p>Crie seu Usuário no sistema</p>
                 </div>
 
-                <form action="" method="post">
+                <form action="" method="post" th:object="${usuario}" action="salvarUsuario">
+                    <div class="form-group my-3">
+                        <input type="email" class="form-control" placeholder="username">
+                    </div>
                     <div class="form-group my-3">
                         <input type="text" class="form-control" placeholder="username">
                     </div>
                     <div class="form-group my-3">
                         <input type="password" class="form-control" placeholder="Insira sua senha">
                     </div>
-                    <div class="cadastro">
-                        <a th:href= "@{/cadastro}">Não tem cadastro? Clique aqui.</a>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Login</button>
+        
+                    <button class="btn btn-primary" type="submit">Cadastrar</button>
                     <button class="btn btn-info" type="button">Voltar</button>
                 </form>
             </div>
