@@ -90,11 +90,14 @@
 
             <!-- ALUNOS CANCELADOS -->
             <div class="card" style="width: 18rem;">
-                <img src="img/alunos-cancelados.webp" class="card-img-top img-card-pesquisa d-flex justify-content-start">
+                <a th:href= "@{/alunos-cancelados}">
+                    <img src="img/alunos-cancelados.webp" class="card-img-top img-card-pesquisa d-flex justify-content-start">
+                </a>
+                
                 <div class="card-body">
                     <h5 class="card-title">Alunos Cancelados no Sistema</h5>
                     <p class="card-text">Busque por todos os alunos que estão cancelados no sistema.</p>
-                    <a href="#" class="btn btn-outline-primary">Clique Aqui!</a>
+                    <a th:href= "@{/alunos-cancelados}" class="btn btn-outline-primary">Clique Aqui!</a>
                 </div>
             </div>
         </div>
