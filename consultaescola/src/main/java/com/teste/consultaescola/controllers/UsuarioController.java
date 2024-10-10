@@ -19,13 +19,12 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 @Controller
 public class UsuarioController {
 
     @Autowired
     private ServiceUsuario serviceUsuario;
-    
+
     @GetMapping("/")
     public ModelAndView login() {
         ModelAndView mv = new ModelAndView();
@@ -50,29 +49,45 @@ public class UsuarioController {
     }
 
     @PostMapping("salavarUsuario")
-    public ModelAndView salavarUsuario(Usuario usuario) throws Exception {
+    public ModelAndView salavarUsuario(@Valid Usuario usuario, BindingResult br) throws Exception {
         ModelAndView mv = new ModelAndView();
-        serviceUsuario.salvarUsuario(usuario);
-        mv.setViewName("redirect:/");
+        if (br.hasErrors()) {
+            mv.addObject("msgErroCadastro", "Preencha todos os campos corretamente para efetuar seu cadastro");
+            mv.setViewName("login/cadastro");
+        } else {
+            serviceUsuario.salvarUsuario(usuario);
+            mv.setViewName("redirect:/");
+        }
         return mv;
     }
-    
-    @PostMapping("/login")
-    public ModelAndView login(@Valid Usuario usuario, BindingResult br, HttpSession session) throws NoSuchAlgorithmException, ServiceExc {
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("usuario", new Usuario());
-        if (br.hasErrors()) {
-            mv.setViewName("login/login");
-        }
 
-        Usuario userLogin = serviceUsuario.loginUser(usuario.getUser(), Util.md5(usuario.getSenha()));
-        if (userLogin == null) {
+    @PostMapping("/login")
+    public ModelAndView login(@Valid Usuario usuario, BindingResult br, HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+
+        try {
+            mv.addObject("usuario", new Usuario());
+            if (br.hasErrors()) {
+                mv.setViewName("login/login");
+            }
+
+            Usuario userLogin = serviceUsuario.loginUser(usuario.getUser(), Util.md5(usuario.getSenha()));
+
+            if (userLogin == null) {
+                mv.addObject("msg", "Usuário não encontrado. Tente novamente");
+                mv.setViewName("login/login");
+            } else {
+                session.setAttribute("usuarioLogado", userLogin);
+                return index();
+            }
+
+            return mv;
+
+        } catch (NoSuchAlgorithmException | ServiceExc e) {
             mv.addObject("msg", "Usuário não encontrado. Tente novamente");
-        } else {
-            session.setAttribute("usuarioLogado", userLogin);
-            return index();
-        }
-        
+            mv.setViewName("login/login");
+        } 
+
         return mv;
     }
 
@@ -81,6 +96,5 @@ public class UsuarioController {
         session.invalidate();
         return login();
     }
-    
-    
+
 }

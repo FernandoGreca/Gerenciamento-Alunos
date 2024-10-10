@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -17,10 +18,13 @@ public class Usuario {
     private long id;
 
     @Email
+    @NotBlank
     private String email;
 
     @Size(min = 3, max = 20, message = "Usuario deve conter entre 3 a 20 caracteres")
+    @NotBlank
     private String user;
+    @NotBlank
     private String senha;
 
 
