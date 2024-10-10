@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.teste.consultaescola.exceptions.EmailExistException;
 import com.teste.consultaescola.exceptions.ServiceExc;
 import com.teste.consultaescola.model.Aluno;
 import com.teste.consultaescola.model.Usuario;
@@ -49,14 +50,22 @@ public class UsuarioController {
     }
 
     @PostMapping("salavarUsuario")
-    public ModelAndView salavarUsuario(@Valid Usuario usuario, BindingResult br) throws Exception {
+    public ModelAndView salavarUsuario(@Valid Usuario usuario, BindingResult br) {
         ModelAndView mv = new ModelAndView();
         if (br.hasErrors()) {
             mv.addObject("msgErroCadastro", "Preencha todos os campos corretamente para efetuar seu cadastro");
             mv.setViewName("login/cadastro");
         } else {
-            serviceUsuario.salvarUsuario(usuario);
-            mv.setViewName("redirect:/");
+            try {
+                serviceUsuario.salvarUsuario(usuario);
+                mv.setViewName("redirect:/");
+            } catch (EmailExistException e) {
+                mv.addObject("msgErroCadastro", e.getMessage());
+                mv.setViewName("login/cadastro");
+            } catch (Exception e) {
+                mv.addObject("msgErroCadastro", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+                mv.setViewName("login/cadastro");
+            }
         }
         return mv;
     }
