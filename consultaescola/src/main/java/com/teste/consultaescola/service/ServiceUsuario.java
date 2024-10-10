@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.teste.consultaescola.dao.UsuarioDao;
 import com.teste.consultaescola.exceptions.CriptoExistException;
 import com.teste.consultaescola.exceptions.EmailExistException;
+import com.teste.consultaescola.exceptions.ServiceExc;
 import com.teste.consultaescola.model.Usuario;
 import com.teste.consultaescola.util.Util;
 
@@ -18,7 +19,6 @@ public class ServiceUsuario {
     private UsuarioDao usuarioRepositorio;
     
     public void salvarUsuario(Usuario usuario) throws Exception{
-        
         try {
             
             if (usuarioRepositorio.findByEmail(usuario.getEmail()) != null) {
@@ -34,4 +34,9 @@ public class ServiceUsuario {
         usuarioRepositorio.save(usuario);
     }
 
+    public Usuario loginUser(String user, String senha) throws ServiceExc {
+
+        Usuario userLogin = usuarioRepositorio.buscarLogin(user, senha);
+        return userLogin;
+    }
 }

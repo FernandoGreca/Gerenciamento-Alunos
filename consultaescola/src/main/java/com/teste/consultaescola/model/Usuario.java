@@ -36,10 +36,10 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getuser() {
+    public String getUser() {
         return user;
     }
-    public void setuser(String user) {
+    public void setUser(String user) {
         this.user = user;
     }
     public String getSenha() {
