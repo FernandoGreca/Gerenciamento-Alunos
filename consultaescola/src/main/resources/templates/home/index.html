@@ -24,7 +24,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <div th:replace="fragmentos/fragmentos :: cabecalho "></div>
+    <div th:replace="fragmentos/fragmentos :: cabecalho-pesquisa "></div>
 
 
     <section class="neo-section" style="background-image: url('img/background.jpg');">
@@ -34,42 +34,25 @@
             <h1 class="texto-centro">Sistema de Gerencimento de Alunos</h1>
 
             <div class="botoes">
-                <div class="wm">
+                <div class="wm mt-2">
                     <a th:href="@{/form-aluno}" style="all: unset;">
                         <h5 class="btn-meu"><i class="fas fa-user-graduate"></i> CADASTRAR ALUNO</h5>
                     </a>
                 </div>
-                <div class="wm">
+                <div class="wm mt-2">
                     <a th:href="@{/alunos-cadastrados}" style="all: unset;">
                         <h5 class="btn-meu"><i class="fas fa-search"></i> ENCONTRAR ALUNO</h5>
+                    </a>
+                </div>
+                <div class="wm mt-2">
+                    <a th:href="@{/filtro-alunos}" style="all: unset;">
+                        <h5 class="btn-meu"><i class="bi bi-funnel-fill"></i> FILTRO ALUNO</h5>
                     </a>
                 </div>
             </div>
             <div class="clear"></div>
         </div>
     </section>
-
-    <!-- INICIO DO MODAL -->
-    <div class="modal fade" tabindex="-1" id="modalPesquisa">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Encontre um aluno</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="post" action="pesquisar-aluno" th:object="${aluno}">
-                    <div class="modal-body">
-                        <input type="text" placeholder="Digite o nome do aluno" th:field="*{nome}" class="form-control">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-outline-success">Enviar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- FIM DO MODAL -->
 
     <div th:replace="fragmentos/fragmentos :: rodape"></div>
 
